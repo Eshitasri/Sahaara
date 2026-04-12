@@ -1,16 +1,25 @@
 import axios from "axios";
+import { useEffect } from "react";
+
+// 1. Unified API URL - ensure /api is at the end
+const API_BASE_URL = import.meta.env.VITE_API_URL || "https://sahaara-i7fk.onrender.com";
 
 const API = axios.create({
-  baseURL: "https://sahaara-i7fk.onrender.com",
+  baseURL: `${API_BASE_URL}/api`, 
 });
-const API_URL = import.meta.env.VITE_API_URL;
 
-useEffect(() => {
-  fetch(${API_URL}/api/health)
-    .then(res => res.json())
-    .then(data => console.log(data))
-    .catch(err => console.error(err));
-}, []);
+// Health check to verify connection on load
+// Added backticks and checked API_BASE_URL
+export const useHealthCheck = () => {
+  useEffect(() => {
+    fetch(`${API_BASE_URL}/api/health`)
+      .then((res) => res.json())
+      .then((data) => console.log("Backend Status:", data))
+      .catch((err) => console.error("Backend Connection Failed:", err));
+  }, []);
+};
+
+// ─── Interceptors ────────────────────────────────────────────────────────────
 
 // Attach JWT token to every request
 API.interceptors.request.use((config) => {
@@ -19,7 +28,7 @@ API.interceptors.request.use((config) => {
   return config;
 });
 
-// Handle 401 globally
+// Handle 401 globally (Session Expired)
 API.interceptors.response.use(
   (res) => res,
   (err) => {
@@ -28,7 +37,7 @@ API.interceptors.response.use(
       window.location.href = "/login";
     }
     return Promise.reject(err);
-  },
+  }
 );
 
 // ─── Auth ─────────────────────────────────────────────────────────────────────
@@ -92,3 +101,5 @@ export const updateUserStatus = (id, status) =>
   API.patch(`/admin/users/${id}/status`, { status });
 export const reassignDelivery = (id, volunteerId) =>
   API.patch(`/admin/deliveries/${id}/reassign`, { volunteerId });
+
+export default API;
