@@ -23,12 +23,13 @@ const { errorHandler } = require('./src/middleware/error.middleware');
 const logger = require('./src/utils/logger');
 
 const app = express();
+app.set('trust proxy', 1);
 const server = http.createServer(app);
 
 // Socket.io for real-time updates
 const io = new Server(server, {
   cors: {
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+    origin: process.env.FRONTEND_URL || "https://sahaara-ebon.vercel.app",
     methods: ['GET', 'POST'],
   },
 });
@@ -38,7 +39,10 @@ app.set('io', io);
 
 // ─── Middleware ───────────────────────────────────────────────────────────────
 app.use(helmet());
-app.use(cors({ origin: process.env.FRONTEND_URL || 'http://localhost:3000', credentials: true }));
+app.use(cors({
+  origin: process.env.FRONTEND_URL || "https://sahaara-ebon.vercel.app",
+  credentials: true
+}));
 app.use(morgan('dev'));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
