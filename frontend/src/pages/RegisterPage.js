@@ -46,7 +46,7 @@ export default function RegisterPage() {
                 <path d="M8 12l3 3 5-5" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </div>
-            <span style={{ fontSize: 18, fontWeight: 700, color: '#1B4332', fontFamily: "'Playfair Display',serif" }}>ResourceAI</span>
+            <span style={{ fontSize: 18, fontWeight: 700, color: '#1B4332', fontFamily: "'Playfair Display',serif" }}>Sahaara</span>
           </Link>
           <h1 style={{ fontSize: 28, fontWeight: 700, color: '#1B4332', fontFamily: "'Playfair Display',serif", marginBottom: 6 }}>Join the Network</h1>
           <p style={{ fontSize: 14, color: '#6B6560' }}>Create your account to start making an impact</p>
