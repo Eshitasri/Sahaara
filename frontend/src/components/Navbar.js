@@ -27,7 +27,7 @@ export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  // const [menuOpen, setMenuOpen] = useState(false);       Unused var is creating hindrance while deploying
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
