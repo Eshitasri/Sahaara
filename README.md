@@ -194,6 +194,8 @@ GET    /api/admin/dashboard        Admin dashboard
 - **Database**: MongoDB Atlas
 - **Media**: Cloudinary
 
+- Deployment Link: https://sahaara-ebon.vercel.app
+
 ---
 
 ## 📄 License
