@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --forest:   #1B4332;
+  --forest2:  #2D6A4F;
+  --forest3:  #40916C;
+  --sage:     #74C69D;
+  --cream:    #FEFAE0;
+  --cream2:   #F8F3E3;
+  --gold:     #D4A853;
+  --gold2:    #E8C07A;
+  --charcoal: #1C1C1A;
+  --warm-gray:#6B6560;
+  --light:    #FAFAF8;
+  --white:    #FFFFFF;
+  --red:      #C0392B;
+  --shadow-sm: 0 2px 8px rgba(27,67,50,0.08);
+  --shadow-md: 0 8px 32px rgba(27,67,50,0.12);
+  --shadow-lg: 0 20px 60px rgba(27,67,50,0.16);
+  --radius:   16px;
+  --radius-sm:10px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--light);
+  color: var(--charcoal);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+h1, h2, h3 { font-family: 'Playfair Display', serif; }
+
+input, select, textarea, button { font-family: 'DM Sans', sans-serif; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cream2); }
+::-webkit-scrollbar-thumb { background: var(--sage); border-radius: 3px; }
+
+/* Animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: .6; transform: scale(1.3); }
+}
+
+.animate-fadeUp  { animation: fadeUp .6s ease both; }
+.animate-fadeIn  { animation: fadeIn .4s ease both; }
+.delay-1 { animation-delay: .1s; }
+.delay-2 { animation-delay: .2s; }
+.delay-3 { animation-delay: .3s; }
+.delay-4 { animation-delay: .4s; }
+.delay-5 { animation-delay: .5s; }
+
+/* Loading */
+.loading-screen {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--forest);
+  flex-direction: column; gap: 16px;
+}
+.loading-screen p { color: var(--sage); font-size: 14px; }
