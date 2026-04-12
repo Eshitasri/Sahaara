@@ -9,7 +9,7 @@ const User = require('../models/User.model');
 const Donation = require('../models/Donation.model');
 const Request = require('../models/Request.model');
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/ai-resource-db';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://eshitasug24mae_db_user:1234567890qwerty@cluster0.gidmvjd.mongodb.net/MyWebDB?retryWrites=true&w=majority';
 
 const sampleUsers = [
   { name: 'Admin User', email: 'admin@example.com', phone: '+919000000000', password: 'Admin@123', role: 'admin', isVerified: true, status: 'active' },
