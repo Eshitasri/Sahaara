@@ -1,8 +1,16 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://sahaara-i7fk.onrender.com/api",
+  baseURL: "https://sahaara-i7fk.onrender.com",
 });
+const API_URL = import.meta.env.VITE_API_URL;
+
+useEffect(() => {
+  fetch(${API_URL}/api/health)
+    .then(res => res.json())
+    .then(data => console.log(data))
+    .catch(err => console.error(err));
+}, []);
 
 // Attach JWT token to every request
 API.interceptors.request.use((config) => {
