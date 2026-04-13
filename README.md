@@ -1,13 +1,17 @@
-# AI-Powered Resource Distribution System
+# 🌿 Sahaara — Welfare Network
 
-A full-stack web application that connects **Donors**, **NGOs**, and **Volunteers** using AI-based demand analysis, smart matching algorithms, and fraud detection.
+> *Connecting surplus to scarcity, and kindness to the needy.*
+
+A full-stack AI-powered web platform that bridges **Donors**, **NGOs**, and **Volunteers** to streamline resource distribution using smart matching algorithms, demand analysis, and fraud detection.
+
+🔗 **Live Demo**: [https://sahaara-ebon.vercel.app](https://sahaara-ebon.vercel.app)
 
 ---
 
 ## 🏗 Project Structure
 
 ```
-ai-resource-distribution/
+Sahaara/
 ├── backend/                  # Node.js + Express API server
 │   ├── src/
 │   │   ├── controllers/      # Route handlers
@@ -15,7 +19,7 @@ ai-resource-distribution/
 │   │   ├── routes/           # API route definitions
 │   │   ├── middleware/       # Auth, validation, error handling
 │   │   ├── services/         # AI matching, fraud detection, OTP
-│   │   └── utils/            # Helpers, logger
+│   │   └── utils/            # Helpers, seed script
 │   ├── config/               # DB, JWT, environment config
 │   └── server.js             # Entry point
 ├── frontend/                 # React.js application
@@ -26,10 +30,9 @@ ai-resource-distribution/
 │   │   └── context/          # Auth & App state (React Context)
 │   └── public/
 ├── database/
-│   └── schema.sql            # PostgreSQL schema (alternative to MongoDB)
-├── docs/
-│   └── API.md                # Full API documentation
-└── docker-compose.yml        # One-command setup
+│   └── schema.sql            # PostgreSQL schema (reference)
+└── docs/
+    └── API.md                # Full API documentation
 ```
 
 ---
@@ -40,7 +43,7 @@ ai-resource-distribution/
 |-------|-----------|
 | Frontend | React.js, Tailwind CSS, React Router |
 | Backend | Node.js, Express.js |
-| Database | MongoDB (Mongoose) |
+| Database | MongoDB Atlas (Mongoose) |
 | Authentication | JWT + OTP via Twilio |
 | AI Matching | K-Nearest Neighbor (custom JS implementation) |
 | Fraud Detection | Rule-based + anomaly scoring |
@@ -48,6 +51,7 @@ ai-resource-distribution/
 | Real-time | Socket.io |
 | File Upload | Multer + Cloudinary |
 | Email/SMS | Nodemailer + Twilio |
+| AI Assistant | Anthropic Claude API |
 
 ---
 
@@ -55,31 +59,69 @@ ai-resource-distribution/
 
 ### Prerequisites
 - Node.js v18+
-- MongoDB (local or Atlas)
+- MongoDB Atlas account
 - npm or yarn
 
 ### 1. Clone & Install
 
 ```bash
-git clone <your-repo>
-cd ai-resource-distribution
+git clone https://github.com/Eshitasri/Sahaara.git
+cd Sahaara
 
-# Install backend deps
+# Install backend dependencies
 cd backend && npm install
 
-# Install frontend deps
+# Install frontend dependencies
 cd ../frontend && npm install
 ```
 
 ### 2. Environment Setup
 
-```bash
-# Backend
-cp backend/.env.example backend/.env
-# Fill in your MongoDB URI, JWT secret, Twilio keys, etc.
+Create a `.env` file in the `backend/` folder:
+
+```env
+PORT=5000
+NODE_ENV=development
+
+MONGODB_URI=your_mongodb_connection_string
+
+JWT_SECRET=your_jwt_secret
+JWT_EXPIRES_IN=7d
+
+TWILIO_ACCOUNT_SID=your_twilio_sid
+TWILIO_AUTH_TOKEN=your_twilio_token
+TWILIO_PHONE_NUMBER=your_twilio_number
+
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USER=your_email@gmail.com
+EMAIL_PASS=your_app_password
+
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+
+ANTHROPIC_API_KEY=your_anthropic_key
+FRONTEND_URL=http://localhost:3000
 ```
 
-### 3. Run Development
+### 3. Seed the Database
+
+```bash
+cd backend
+npm run seed
+```
+
+This creates sample users, donations, and NGO requests with the following credentials:
+
+| Role | Email | Password |
+|------|-------|----------|
+| Admin | admin@example.com | Admin@123 |
+| Donor | priya@donor.com | Donor@123 |
+| NGO | care@ngo.com | NGO@1234 |
+| Volunteer | arjun@vol.com | Vol@1234 |
+
+### 4. Run Development
 
 ```bash
 # Terminal 1 - Backend
@@ -89,60 +131,54 @@ cd backend && npm run dev
 cd frontend && npm start
 ```
 
-### 4. Docker (One Command)
-
-```bash
-docker-compose up --build
-```
-
-App runs at: http://localhost:3000  
-API runs at: http://localhost:5000
+- App: http://localhost:3000
+- API: http://localhost:5000
 
 ---
 
 ## 👥 User Roles
 
-### Donor
-- Register & verify identity (OTP)
-- Upload food/clothes/medicine donations
+### 🤲 Donor
+- Register & verify identity via OTP
+- Upload food, clothes, medicine donations
 - Track donation delivery status
 - View impact dashboard
 
-### NGO
-- Register organisation & verify
-- Submit resource requests (need data)
+### 🏢 NGO
+- Register organisation & get verified
+- Submit resource requests
 - Track matched donations in real-time
 - Rate volunteer performance
 
-### Volunteer
-- Register & get GPS-enabled
+### 🚴 Volunteer
+- Register & enable GPS location
 - Accept/reject delivery assignments
-- Confirm pickup (Photo + OTP)
+- Confirm pickup with Photo + OTP
 - Build trust score over time
 
-### Admin
+### 🛡 Admin
 - View fraud detection alerts
 - Suspend flagged accounts
 - Reassign deliveries
-- View analytics dashboard
+- View full analytics dashboard
 
 ---
 
 ## 🤖 AI Features
 
 ### 1. Demand Analysis (Clustering)
-- Groups NGO requests by location + category
+- Groups NGO requests by location and category
 - Predicts upcoming demand based on historical patterns
 - Uses K-Means clustering to identify hotspots
 
-### 2. Matching Algorithm
-- Finds nearest volunteer to donor location (GPS)
-- Weights: Distance (40%) + Trust Score (30%) + Category Match (30%)
+### 2. Smart Matching Algorithm
+- Finds nearest volunteer to donor location via GPS
+- Weighted scoring: Distance (40%) + Trust Score (30%) + Category Match (30%)
 - Average match time: < 2 seconds
 
 ### 3. Fraud Detection
 - Checks delivery time vs expected time
-- Detects GPS drift / location anomalies
+- Detects GPS drift and location anomalies
 - OTP mismatch flagging
 - Repeated offense tracking → auto-suspend
 
@@ -150,7 +186,7 @@ API runs at: http://localhost:5000
 
 ## 📡 API Overview
 
-See `docs/API.md` for full documentation.
+See [`docs/API.md`](./docs/API.md) for full documentation.
 
 ```
 POST   /api/auth/register          Register user
@@ -189,12 +225,14 @@ GET    /api/admin/dashboard        Admin dashboard
 
 ## 📦 Deployment
 
-- **Backend**: Railway / Render / AWS EC2
-- **Frontend**: Vercel / Netlify
-- **Database**: MongoDB Atlas
-- **Media**: Cloudinary
+| Service | Platform |
+|---------|----------|
+| Frontend | Vercel |
+| Backend | Render |
+| Database | MongoDB Atlas |
+| Media Storage | Cloudinary |
 
-- Deployment Link: https://sahaara-ebon.vercel.app
+🔗 Live: [https://sahaara-ebon.vercel.app](https://sahaara-ebon.vercel.app)
 
 ---
 
